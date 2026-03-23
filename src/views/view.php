@@ -27,7 +27,7 @@ class view
             ob_get_clean();
             return $buffer;
         } else {
-            echo "не найден файл по пути $fileName";
+            echo ":( не найден файл по пути $fileName";
         }
     }
 }

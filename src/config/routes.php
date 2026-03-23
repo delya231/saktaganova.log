@@ -1,7 +1,8 @@
 <?php
 
 return[
-  '~^test/$~' => [\src\controllers\TestController::class,'view'],  
+  '~^articles/$~' => [\src\controllers\ArticlesController::class,'index'], 
+  '~^article/(\d+)$~' => [\src\controllers\ArticlesController::class,'view'],
  '~^$~' => [\src\controllers\MainController::class,'main'], 
 
 ]; 
