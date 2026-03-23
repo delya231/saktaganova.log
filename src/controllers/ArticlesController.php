@@ -2,22 +2,30 @@
 
 namespace Src\Controllers;
 
-use src\services\Db;
+use src\models\Articles;
+use src\models\Users;
+// use src\services\Db;
 
 class ArticlesController extends Controller
 {
     public function index()
     {
-        $db = new Db();
-        $articles = $db->query('SELECT * FROM `articles`;');
-
+        // $db = new Db();
+        $articles = Articles::findAll();
+    //    $db->query('SELECT * FROM `articles`;' ,[], Articles::class);
         $this->view->renderHtml('articles/index.php', ['articles' => $articles]);
     }
     public function view($id)
     {
-        $db = new Db();
-        $article = $db->query('SELECT * FROM `articles` WHERE id =:id;', [':id' => $id]);
+        $article = Articles::getById($id);
        
-        $this->view->renderHtml('articles/view.php', ['article' => $article]);
+        if($article !== null){
+             $author = Users::getById($article->getAuthorId());
+          $this->view->renderHtml('articles/view.php', ['article' => $article, 'author' =>$author]);
+        }else{
+              $this->view->renderHtml('errors/404.php', [], 404); 
+        }
+       
+       
     }
 }

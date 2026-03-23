@@ -11,6 +11,7 @@ class view
     }
     public function renderHtml($viewName, array $vars = [], int $code = 200)
     {
+        http_response_code($code);
         $layoutFile = "layouts/{$this->layout}.php";
         $content = $this->renderFile($viewName, $vars);
         $fileVars = ['content' => $content];

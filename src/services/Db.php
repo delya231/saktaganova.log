@@ -15,12 +15,12 @@ class Db
         );
         $this->pdo->exec(statement: 'SET NAMES UTF8');
     }
-    public function query(string $sql, $params = []): ?array {
+    public function query(string $sql, $params = [], string $className = 'stdClass'): ?array {
         $sth = $this->pdo->prepare($sql);
         $result = $sth->execute($params);
         if(false === $result){
             return null;
         }
-        return $sth->fetchAll();
+        return $sth->fetchAll(\PDO::FETCH_CLASS, $className);
     }
 }
