@@ -99,7 +99,11 @@
         .posts h1{
             color:#667eea;
         }
-        
+        hr {
+            color:#667eea;
+            width: 2px !important;
+        }
+       
        
 
 

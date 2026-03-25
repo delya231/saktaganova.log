@@ -5,7 +5,8 @@ namespace Src\services;
 class Db
 {
     private $pdo;
-    public  function __construct()
+    private static $instance;
+    private  function __construct()
     {
         $dbOptions = (require __DIR__ . '/../config/settings.php')['db'];
         $this->pdo = new \PDO(
@@ -14,6 +15,12 @@ class Db
             password: $dbOptions['password'],
         );
         $this->pdo->exec(statement: 'SET NAMES UTF8');
+    }
+    public static function getInstance(){
+     if(self::$instance === null){
+        self::$instance = new self();
+     }
+     return self::$instance;
     }
     public function query(string $sql, $params = [], string $className = 'stdClass'): ?array {
         $sth = $this->pdo->prepare($sql);

@@ -14,7 +14,7 @@ class MainController extends Controller
     }
     public function main()
     {
-        $db = new Db();
+       $db = Db::getInstance();
         $articles = $db->query('SELECT * FROM `articles`;');
         
     $this->view->renderHtml('main/main.php', ['articles'=> $articles]);

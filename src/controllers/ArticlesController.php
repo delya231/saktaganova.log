@@ -17,11 +17,17 @@ class ArticlesController extends Controller
     }
     public function view($id)
     {
-        $article = Articles::getById($id);
+        // $article = Articles::getById($id);
        
+        // if($article !== null){
+        //      $author = Users::getById($article->getAuthorId());
+        //   $this->view->renderHtml('articles/view.php', ['article' => $article, 'author' =>$author]);
+        // }else{
+        //       $this->view->renderHtml('errors/404.php', [], 404); 
+        // }
+        $article = Articles::getById($id);
         if($article !== null){
-             $author = Users::getById($article->getAuthorId());
-          $this->view->renderHtml('articles/view.php', ['article' => $article, 'author' =>$author]);
+          $this->view->renderHtml('articles/view.php', ['article' => $article]);
         }else{
               $this->view->renderHtml('errors/404.php', [], 404); 
         }

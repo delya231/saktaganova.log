@@ -27,8 +27,12 @@ public function getAuthorId():int
 {
     return $this->author_id;
 }
+public function getAuthor():Users
+{
+    return Users:: getById($this->author_id);
+}
 public static function getById($id): ?self{
- $db = new Db();
+ $db = Db::getInstance();
 $entities = $db->query('SELECT * FROM `articles` WHERE id = :id;',[':id'=>$id], static::class);
 return $entities ? $entities[0] : null;
 }

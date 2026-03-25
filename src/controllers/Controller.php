@@ -13,12 +13,12 @@ class Controller
         $this->view = new View($this->layout);
     }
     public function main(){
-        `
+        
         $db = new Db();
-        $articles = $db->query('SELECT * FROM `articles`;');
+        $articles = $db->query("SELECT * FROM `articles`;");
         
     $this->view->renderHtml('main/main.php', ['articles'=> $articles]);
     
     }
+    }
 
-}
