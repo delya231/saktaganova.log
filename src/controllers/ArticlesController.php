@@ -28,7 +28,27 @@ class ArticlesController extends Controller
         if($article === null){
             $this->view->renderHtml('errors/404.php',[], 404);
         }
-
-        var_dump($article);
+        if(!empty($_POST)){
+            $article->updateFromArray($_POST);
+        }
+            $this->view->renderHtml('articles/edit.php',['article'=> $article]);
+       
+    }
+    public function delete($id)
+    {
+        $article = Articles::getById($id);
+        if($article === null){
+            $this->view->renderHtml('errors/404.php',[], 404);
+        }
+        $article->delete();
+        
+       
+    }
+    public function add(){
+        $article = new Articles();
+        $article->setName('Новая статья');
+        $article->setText('Текст статьи');
+        $article->setAuthorId(1);
+        $article->save();
     }
 }
