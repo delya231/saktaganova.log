@@ -34,7 +34,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <base href="/saktaganova"> -->
+    <base href="/">
     <title>Блог</title>
     <link rel="stylesheet" href="/style.css">
 </head>
@@ -43,16 +43,32 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <a href="/">БлогДели📚</a>
+                <a href="/articles/">БлогДели📚</a>
             </div>
-            <nav class="nav">
+            <!-- <nav class="nav">
                 <ul>
-                    <li><a href="/">Главная</a></li>
-                    <li><a href="stati.html">Статьи</a></li>
-                    <li><a href="aboutblog.html">О блоге</a></li>
-                    <li><a href="reg.php">Регистрация/Вход</a></li>
+                    <li><a href="/articles">Статьи</a></li>
+                    <li><a href="/blog">О блоге</a></li>
+                    <li><a href="/users/login">Регистрация/Вход</a></li>
                 </ul>
-            </nav>
+            </nav> -->
+     <nav class="nav"> 
+    <ul>
+
+         <li><a href="/articles/search">Поиск</a></li>
+        <li><a href="/articles/">Статьи</a></li>
+        <li><a href="/blog/">О блоге</a></li>
+        
+        <?php if ($user): ?>
+            <li><?= htmlspecialchars($user->getNickname()) ?></li>
+            <li><a href="/users/logout">Выход</a></li>
+        <?php else: ?>
+            
+            <li><a href="/users/signUp">Регистрация</a></li>
+            <li><a href="/users/login">Вход</a></li>
+        <?php endif; ?>
+    </ul>
+</nav>
         </div>
     </header>
     <section class="slog">

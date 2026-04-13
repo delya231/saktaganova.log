@@ -1,29 +1,34 @@
 <?php
-spl_autoload_register(function (string $className) {
-   require_once __DIR__ . '/' . str_replace('\\', '/', $className . '.php');
- });
+try {
+  spl_autoload_register(function (string $className) {
+    require_once __DIR__ . '/' . str_replace('\\', '/', $className . '.php');
+  });
 
 
-$route = $_GET['route'] ?? '';
-$routes = require __DIR__ .'/src/config/routes.php';
-$isRouteFound = false;
-foreach($routes as $pattern => $controllerandAction)  {
-   preg_match($pattern, $route, $matches);
-   if(!empty($matches)){
-    $isRouteFound = true;
-    break;
-   }
-} 
-if(!$isRouteFound){
-    echo'Страница не найдена';
-  return;
-}
-$controllerName = $controllerandAction[0];
-$actionName = $controllerandAction[1];
-unset ($matches[0]);
-$controller = new $controllerName;
- $controller->$actionName(...$matches);
-// var_dump($controllerandAction);
-// var_dump($matches);
+  $route = $_GET['route'] ?? '';
+  $routes = require __DIR__ . '/src/config/routes.php';
+  $isRouteFound = false;
+  foreach ($routes as $pattern => $controllerandAction) {
+    preg_match($pattern, $route, $matches);
+    if (!empty($matches)) {
+      $isRouteFound = true;
+      break;
+    }
+  }
+  $controller = new \src\Controllers\MainController();
+  if (!$isRouteFound) {
+    throw new \src\exceptions\NotFoundException();
+  }
+  $controllerName = $controllerandAction[0];
+  $actionName = $controllerandAction[1];
+  unset($matches[0]);
+  $controller = new $controllerName;
+  $controller->$actionName(...$matches);
+} catch (\src\exceptions\DbException $e) {
+  $controller->view->renderHtml('errors/500.php', ['error' => $e->getMessage()], 500);
+  } catch (\src\exceptions\NotFoundException $e){
+    $controller->view->renderHtml('errors/404.php', ['error' => $e->getMessage()], 404);
+  } catch (\src\exceptions\UnauthorizedException $e){
+    $controller->view->renderHtml('errors/401.php', ['error' => $e->getMessage()], 401);
+  }
 
- ?>

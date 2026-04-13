@@ -103,6 +103,85 @@
             color:#667eea;
             width: 2px !important;
         }
+        .posts {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+}
+
+.posts h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Стилизация горизонтальной линии (hr) */
+.posts hr {
+    border: none;
+    height: 3px;
+    background: linear-gradient(to right, #667eea, transparent);
+    margin: 20px 0 40px 0;
+    width: 100px !important; /* Делаем акцентную линию под заголовком */
+}
+
+/* Контейнер для одной статьи */
+.article-item {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.article-item h3 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.article-item p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Стили для автора */
+.article-author {
+    font-size: 14px;
+    color: #999;
+    font-style: italic;
+    margin-bottom: 20px !important;
+}
+
+/* Красивая кнопка "Подробнее" */
+.btn-more {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #667eea;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.btn-more:hover {
+    background-color: #5a67d8;
+}
+
+/* Убираем лишние HR между статьями, так как теперь есть карточки */
+.article-separator {
+    display: none;
+}
+
+
+ 
        
        
 
